@@ -1,0 +1,2 @@
+total_orders,total_units,revenue_pre_discount,total_discount_given,revenue_post_discount,total_profit,discount_rate_pct,profit_margin_pct,avg_order_value
+9994,31675,3184594.0,122874.48,3061719.52,867218.52,3.86,28.32,306.36

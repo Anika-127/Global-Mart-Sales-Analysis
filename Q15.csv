@@ -1,0 +1,5 @@
+product_id,category,sub_category,units,revenue,profit,avg_discount_pct
+FUR-TA-10004077,Furniture,Tables,6,2278.8,-49.2,10.0
+FUR-TA-10000986,Furniture,Tables,5,932.0,-38.0,20.0
+FUR-TA-10003962,Furniture,Tables,4,1404.0,-28.0,10.0
+OFF-BI-10002540,Office Supplies,Binders,33,159.2,-5.8,3.82

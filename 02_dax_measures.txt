@@ -1,0 +1,70 @@
+// =====================================================================================
+// DAX MEASURES  -  create a table  "_Measures"  (Enter data > blank > rename) and add these
+// Model: dim_date[Date] 1 ---- * df_orders[order_date]   (mark dim_date as the Date table)
+// =====================================================================================
+
+// ---------------- Core volume & money -------------------------------------------------
+Total Orders        = DISTINCTCOUNT ( df_orders[order_id] )
+Total Units         = SUM ( df_orders[quantity] )
+Revenue Pre Discount  = SUM ( df_orders[gross_revenue] )
+Total Discount        = SUM ( df_orders[discount_amount] )
+Revenue Post Discount = SUM ( df_orders[net_revenue] )
+Total Profit          = SUM ( df_orders[total_profit] )
+Total Cost            = SUM ( df_orders[total_cost] )
+
+// ---------------- Ratios --------------------------------------------------------------
+Discount Rate %   = DIVIDE ( [Total Discount], [Revenue Pre Discount] )
+Profit Margin %   = DIVIDE ( [Total Profit],   [Revenue Post Discount] )
+Avg Order Value   = DIVIDE ( [Revenue Post Discount], [Total Orders] )
+Avg Units / Order = DIVIDE ( [Total Units], [Total Orders] )
+Profit per Unit   = DIVIDE ( [Total Profit], [Total Units] )
+
+// ---------------- Share / ranking -----------------------------------------------------
+Revenue % of Total =
+    DIVIDE ( [Revenue Post Discount],
+             CALCULATE ( [Revenue Post Discount], ALL ( df_orders ) ) )
+
+Orders % of Total =
+    DIVIDE ( [Total Orders],
+             CALCULATE ( [Total Orders], ALL ( df_orders[ship_mode] ) ) )
+
+City Revenue Rank =
+    RANKX ( ALL ( df_orders[city] ), [Revenue Post Discount], , DESC, DENSE )
+
+Product Profit Rank =
+    RANKX ( ALL ( df_orders[product_id] ), [Total Profit], , DESC, DENSE )
+
+// ---------------- Time intelligence ---------------------------------------------------
+Revenue PY =
+    CALCULATE ( [Revenue Post Discount], SAMEPERIODLASTYEAR ( dim_date[Date] ) )
+
+Revenue YoY % = DIVIDE ( [Revenue Post Discount] - [Revenue PY], [Revenue PY] )
+
+Profit PY =
+    CALCULATE ( [Total Profit], SAMEPERIODLASTYEAR ( dim_date[Date] ) )
+
+Profit YoY % = DIVIDE ( [Total Profit] - [Profit PY], [Profit PY] )
+
+Revenue YTD = TOTALYTD ( [Revenue Post Discount], dim_date[Date] )
+
+// ---------------- Discount effectiveness ---------------------------------------------
+Loss Making Lines = SUM ( df_orders[is_loss_making] )
+
+Deep Discount Share % =                       // share of order lines discounted by more than 5%
+    DIVIDE ( CALCULATE ( COUNTROWS ( df_orders ), df_orders[discount_percent] > 5 ),
+             COUNTROWS ( df_orders ) )
+
+Margin Gap vs Overall (pts) =
+    [Profit Margin %] - CALCULATE ( [Profit Margin %], ALL ( df_orders ) )
+
+// ---------------- Conditional colour (use in "Format > Colors > fx > Field value") ----
+Margin Colour =
+    SWITCH ( TRUE (),
+        [Profit Margin %] < 0.15, "#C0392B",     // red   - weak
+        [Profit Margin %] < 0.25, "#F4A261",     // amber - watch
+        "#2A9D8F" )                              // green - healthy
+
+// ---------------- Dynamic card titles -------------------------------------------------
+Selected Period Title =
+    "Revenue  |  " &
+    IF ( ISFILTERED ( dim_date[Year] ), SELECTEDVALUE ( dim_date[Year], "Multiple years" ), "2022-2023" )

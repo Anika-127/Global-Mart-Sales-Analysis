@@ -1,0 +1,50 @@
+// =====================================================================================
+// POWER QUERY (M) - load the cleaned fact table
+// Home > Get data > Text/CSV (or SQL Server) > Transform data > Advanced Editor > paste ONE option
+// =====================================================================================
+
+// ---------- OPTION A: from the cleaned CSV (no database needed) ----------------------
+let
+    Source   = Csv.Document(File.Contents("C:\GlobalMart\data\orders_cleaned.csv"),
+                 [Delimiter=",", Columns=32, Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+    Typed    = Table.TransformColumnTypes(Promoted, {
+        {"order_id", Int64.Type}, {"order_date", type date},
+        {"ship_mode", type text}, {"segment", type text}, {"country", type text},
+        {"city", type text}, {"state", type text}, {"postal_code", type text},
+        {"region", type text}, {"category", type text}, {"sub_category", type text},
+        {"product_id", type text},
+        {"cost_price", type number}, {"list_price", type number}, {"quantity", Int64.Type},
+        {"discount_percent", Int64.Type}, {"discount", type number}, {"sale_price", type number},
+        {"profit", type number}, {"gross_revenue", type number}, {"discount_amount", type number},
+        {"net_revenue", type number}, {"total_cost", type number}, {"total_profit", type number},
+        {"profit_margin_pct", type number}, {"order_year", Int64.Type}, {"order_month", Int64.Type},
+        {"order_month_name", type text}, {"order_year_month", type text}, {"order_quarter", type text},
+        {"is_loss_making", Int64.Type}, {"discount_band", type text}})
+in
+    Typed
+
+// ---------- OPTION B: from SQL Server (Import mode) -----------------------------------
+let
+    Source = Sql.Database("localhost", "GlobalMart"),
+    Orders = Source{[Schema="dbo", Item="df_orders"]}[Data]
+in
+    Orders
+
+// =====================================================================================
+// DATE TABLE (create as a new Blank Query, name it  dim_date )
+// =====================================================================================
+let
+    StartDate = #date(2022, 1, 1),
+    EndDate   = #date(2023, 12, 31),
+    Days      = Duration.Days(EndDate - StartDate) + 1,
+    DateList  = List.Dates(StartDate, Days, #duration(1, 0, 0, 0)),
+    ToTable   = Table.FromList(DateList, Splitter.SplitByNothing(), {"Date"}, null, ExtraValues.Error),
+    Typed     = Table.TransformColumnTypes(ToTable, {{"Date", type date}}),
+    Year      = Table.AddColumn(Typed, "Year", each Date.Year([Date]), Int64.Type),
+    MonthNo   = Table.AddColumn(Year, "Month No", each Date.Month([Date]), Int64.Type),
+    MonthName = Table.AddColumn(MonthNo, "Month", each Date.ToText([Date], "MMM"), type text),
+    Quarter   = Table.AddColumn(MonthName, "Quarter", each "Q" & Text.From(Date.QuarterOfYear([Date])), type text),
+    YearMonth = Table.AddColumn(Quarter, "Year-Month", each Date.ToText([Date], "yyyy-MM"), type text)
+in
+    YearMonth

@@ -1,0 +1,18 @@
+{
+  "name": "GlobalMart",
+  "dataColors": ["#1F3A5F", "#2A9D8F", "#E76F51", "#F4A261", "#8D99AE", "#264653", "#E9C46A", "#C0392B"],
+  "background": "#FFFFFF",
+  "foreground": "#1F2933",
+  "tableAccent": "#1F3A5F",
+  "good": "#2A9D8F",
+  "neutral": "#F4A261",
+  "bad": "#C0392B",
+  "textClasses": {
+    "title":  { "fontFace": "Segoe UI Semibold", "fontSize": 12, "color": "#1F3A5F" },
+    "label":  { "fontFace": "Segoe UI", "fontSize": 10, "color": "#52606D" },
+    "callout": { "fontFace": "Segoe UI Semibold", "fontSize": 28, "color": "#1F3A5F" }
+  },
+  "visualStyles": {
+    "page": { "*": { "background": [{ "color": { "solid": { "color": "#F5F7FA" } }, "transparency": 0 }] } }
+  }
+}

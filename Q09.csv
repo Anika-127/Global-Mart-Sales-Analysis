@@ -1,0 +1,16 @@
+rev_rank,city,state,region,orders,revenue,profit,margin_pct
+1,New York City,New York,East,753,245227.65,66099.65,26.95
+2,Los Angeles,California,West,598,181311.07,51803.07,28.57
+3,San Francisco,California,West,499,156304.33,42130.33,26.95
+4,Seattle,Washington,West,456,150225.42,43144.42,28.72
+5,Philadelphia,Pennsylvania,East,483,146235.73,41779.73,28.57
+6,Houston,Texas,Central,446,133436.77,40392.77,30.27
+7,Chicago,Illinois,Central,396,102226.42,28758.42,28.13
+8,Portland,Oregon,West,254,74404.83,22165.83,29.79
+9,Atlanta,Georgia,South,185,67320.6,19241.6,28.58
+10,Miami,Florida,South,204,67045.05,17471.05,26.06
+11,Dallas,Texas,Central,239,63840.21,17596.21,27.56
+12,Detroit,Michigan,Central,198,63791.75,16963.75,26.59
+13,Boston,Massachusetts,East,188,60452.28,17624.28,29.15
+14,San Antonio,Texas,Central,202,58158.47,16777.47,28.85
+15,Cleveland,Ohio,Central,153,57366.13,17827.13,31.08

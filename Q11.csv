@@ -1,0 +1,6 @@
+ship_mode,orders,order_share_pct,revenue_post_discount,avg_order_value,margin_pct
+Standard Class,5758,57.61,1779545.43,309.06,28.56
+Second Class,1957,19.58,582584.84,297.69,27.92
+First Class,1604,16.05,500431.23,311.99,28.22
+Same Day,579,5.79,177370.37,306.34,27.14
+Unknown,96,0.96,21787.65,226.95,31.93

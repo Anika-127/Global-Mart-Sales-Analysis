@@ -1,0 +1,4 @@
+category,revenue_pre_discount,discount_given,discount_rate_pct,revenue_post_discount,total_profit,margin_pct
+Furniture,1048115.0,43892.13,4.19,1004222.87,239670.87,23.87
+Office Supplies,929405.0,35350.69,3.8,894054.31,285431.31,31.93
+Technology,1207074.0,43631.66,3.61,1163442.34,342116.34,29.41

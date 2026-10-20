@@ -1,0 +1,5 @@
+region,orders,revenue_pre_discount,revenue_post_discount,total_profit,discount_rate_pct,margin_pct,share_of_total_pct
+West,2956,924514.0,889856.69,252531.69,3.75,28.38,29.06
+Central,2828,858034.0,822184.57,236911.57,4.18,28.81,26.85
+East,2533,847342.0,815637.28,227458.28,3.74,27.89,26.64
+South,1677,554704.0,534040.98,150316.98,3.73,28.15,17.44

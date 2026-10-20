@@ -1,0 +1,11 @@
+rank_no,product_id,category,sub_category,units,revenue,profit
+1,TEC-PH-10001208,Technology,Phones,153,109616.13,25619.13
+2,OFF-BI-10004342,Office Supplies,Binders,1083,83827.71,23179.71
+3,FUR-TA-10001133,Furniture,Tables,127,67189.44,11182.44
+4,TEC-PH-10001576,Technology,Phones,81,49533.12,16809.12
+5,TEC-CO-10002851,Technology,Copiers,20,44157.75,14537.75
+6,FUR-CH-10000405,Furniture,Chairs,131,36288.0,11660.0
+7,TEC-PH-10000513,Technology,Phones,51,33567.52,9444.52
+8,TEC-PH-10000684,Technology,Phones,52,32322.24,11418.24
+9,TEC-MA-10000596,Technology,Machines,22,28426.97,5942.97
+10,TEC-PH-10002600,Technology,Phones,33,26179.82,10999.82
